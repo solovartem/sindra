@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { get } from 'lodash';
-import MsalInstance from '../utils/msalAuth';
+import ApiUtils from '../utils/apiUtils';
 import { LoginMain, ErrorMsg } from '../views/LoginLayout/styled';
 
 import Loading from '../components/Loading';
@@ -18,21 +18,21 @@ export default function withAuth(
         isLoading: true,
       };
 
-      MsalInstance.handleRedirectCallback(this.handleRedirectCallback);
+      ApiUtils.MsalInstance.handleRedirectCallback(this.handleRedirectCallback);
     }
 
     componentDidMount() {
-      if (MsalInstance.isCallback(window.location.hash)) {
+      if (ApiUtils.MsalInstance.isCallback(window.location.hash)) {
         this.setState({
           renewIframe: true,
         });
         return;
       }
 
-      if (!MsalInstance.getAccount()) {
-        MsalInstance.loginRedirect({});
+      if (!ApiUtils.MsalInstance.getAccount()) {
+        ApiUtils.MsalInstance.loginRedirect({});
       } else {
-        this.getAccessToken();
+        ApiUtils.MsalInstance.getAccessToken();
       }
     }
 
@@ -65,13 +65,13 @@ export default function withAuth(
 
       try {
 		console.log("MSAL: (index.js) calling 'acquireTokenSilent'");
-        const response = await MsalInstance.acquireTokenSilent(tokenRequest);
+        const response = await ApiUtils.MsalInstance.acquireTokenSilent(tokenRequest);
         this.getAccessTokenFromResponse(response);
       } catch (error) {
 		console.log("MSAL: (index.js) Error calling 'acquireTokenSilent'");
 		console.log(error);
 		console.log("MSAL: (index.js) calling 'acquireTokenRedirect'");
-        MsalInstance.acquireTokenRedirect(tokenRequest);
+        ApiUtils.MsalInstance.acquireTokenRedirect(tokenRequest);
       }
     }
 
@@ -86,7 +86,7 @@ export default function withAuth(
     };
 
     isAuthenticate() {
-      return !!MsalInstance.getAccount();
+      return !!ApiUtils.MsalInstance.getAccount();
     }
 
     render() {
