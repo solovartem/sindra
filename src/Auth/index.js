@@ -18,7 +18,7 @@ export default function withAuth(
         isLoading: true,
       };
 
-      MSApi.handleRedirectCallback(ApiUtils.redirectCallback);
+      MSApi.handleRedirectCallback(this.handleRedirectCallback);
     }
 
     componentDidMount() {
@@ -32,7 +32,7 @@ export default function withAuth(
       if (!MSApi.getAccount()) {
         MSApi.loginRedirect({});
       } else {
-        ApiUtils.getAccessToken();
+        this.getAccessToken();
       }
     }
 

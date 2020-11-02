@@ -28,11 +28,11 @@ class ApiUtils {
   });
 
   constructor() {
-    MsalInstance.handleRedirectCallback(this.redirectCallback);
+    MsalInstance.handleRedirectCallback(ApiUtils.redirectCallback);
   }
 
   static redirectCallback() {
-    this.getAccessToken();
+    ApiUtils.getAccessToken();
   }
 
   static async getAccessToken() {
