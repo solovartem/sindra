@@ -26,6 +26,14 @@ class ApiUtils {
     baseURL: ApiUtils.BASE_URL,
   });
 
+  constructor() {
+    MsalInstance.handleRedirectCallback(this.redirectCallback);
+  }
+
+  static redirectCallback() {
+    this.getAccessToken();
+  }
+
   static async getAccessToken() {
     const tokenRequest = {
       scopes: [process.env.REACT_APP_MSAL_CLIENT_ID],
