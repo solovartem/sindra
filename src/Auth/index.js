@@ -18,21 +18,21 @@ export default function withAuth(
         isLoading: true,
       };
 
-      ApiUtils.MSApi.handleRedirectCallback(ApiUtils.redirectCallback);
+      MSApi.handleRedirectCallback(ApiUtils.redirectCallback);
     }
 
     componentDidMount() {
-      if (ApiUtils.MSApi.isCallback(window.location.hash)) {
+      if (MSApi.isCallback(window.location.hash)) {
         this.setState({
           renewIframe: true,
         });
         return;
       }
 
-      if (!ApiUtils.MSApi.getAccount()) {
-        ApiUtils.MSApi.loginRedirect({});
+      if (!MSApi.getAccount()) {
+        MSApi.loginRedirect({});
       } else {
-        ApiUtils.MSApi.getAccessToken();
+        MSApi.getAccessToken();
       }
     }
 
@@ -65,13 +65,13 @@ export default function withAuth(
 
       try {
 		console.log("MSAL: (index.js) calling 'acquireTokenSilent'");
-        const response = await ApiUtils.MSApi.acquireTokenSilent(tokenRequest);
+        const response = await MSApi.acquireTokenSilent(tokenRequest);
         this.getAccessTokenFromResponse(response);
       } catch (error) {
 		console.log("MSAL: (index.js) Error calling 'acquireTokenSilent'");
 		console.log(error);
 		console.log("MSAL: (index.js) calling 'acquireTokenRedirect'");
-        ApiUtils.MSApi.acquireTokenRedirect(tokenRequest);
+        MSApi.acquireTokenRedirect(tokenRequest);
       }
     }
 
@@ -86,7 +86,7 @@ export default function withAuth(
     };
 
     isAuthenticate() {
-      return !!ApiUtils.MSApi.getAccount();
+      return !!MSApi.getAccount();
     }
 
     render() {
