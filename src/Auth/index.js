@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { get } from 'lodash';
-import ApiUtils from '../utils/apiUtils';
+import ApiUtils, { MSApi } from '../utils/apiUtils';
 import { LoginMain, ErrorMsg } from '../views/LoginLayout/styled';
 
 import Loading from '../components/Loading';
