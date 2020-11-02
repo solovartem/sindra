@@ -32,7 +32,7 @@ export default function withAuth(
       if (!MSApi.getAccount()) {
         MSApi.loginRedirect({});
       } else {
-        MSApi.getAccessToken();
+        ApiUtils.getAccessToken();
       }
     }
 
