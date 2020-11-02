@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import store from '../redux/store';
 import MsalInstance from './msalAuth';
 
+export const MSApi = MsalInstance;
 export function getAPIErrorMessage(error, defaultMessage = 'Internal server error') {
   return get(error, 'dataSource.error', defaultMessage);
 }
