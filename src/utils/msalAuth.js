@@ -16,4 +16,11 @@ const msalConfig = {
 
 const msalInstance = new Msal.UserAgentApplication(msalConfig);
 
+msalInstance.handleRedirectCallback((error, result) => {
+  // msal requires a redirect callback, even though can't use it to
+  // get the result as it will redirect again after it has the result
+  // and not provide the result of the call back on the second
+  // redirect.
+});
+
 export default msalInstance;

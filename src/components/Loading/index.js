@@ -1,14 +1,23 @@
-import React from 'react';
-import { SpinnerWrapper, SubText, LoadingWrapper } from './styled';
+import React from "react";
+import {
+  SpinnerWrapper,
+  SubText,
+  LoadingWrapper,
+  SubTextBlack,
+} from "./styled";
 
-const Loading = (props) => {
-  const { subtext } = props;
+const Loading = props => {
+  const { subtext, color } = props;
   return (
     <LoadingWrapper>
       <SpinnerWrapper>
         <div className="main-circle" />
       </SpinnerWrapper>
-      {subtext && <SubText>{subtext}</SubText>}
+      {subtext && color === "black" ? (
+        <SubTextBlack>{subtext}</SubTextBlack>
+      ) : (
+        <SubText>{subtext}</SubText>
+      )}
     </LoadingWrapper>
   );
 };

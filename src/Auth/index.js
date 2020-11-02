@@ -64,9 +64,13 @@ export default function withAuth(
       };
 
       try {
+		console.log("MSAL: (index.js) calling 'acquireTokenSilent'");
         const response = await MsalInstance.acquireTokenSilent(tokenRequest);
         this.getAccessTokenFromResponse(response);
       } catch (error) {
+		console.log("MSAL: (index.js) Error calling 'acquireTokenSilent'");
+		console.log(error);
+		console.log("MSAL: (index.js) calling 'acquireTokenRedirect'");
         MsalInstance.acquireTokenRedirect(tokenRequest);
       }
     }

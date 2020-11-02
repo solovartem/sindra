@@ -30,13 +30,17 @@ class ApiUtils {
     const tokenRequest = {
       scopes: [process.env.REACT_APP_MSAL_CLIENT_ID],
     };
-    const response = await MsalInstance.acquireTokenSilent(tokenRequest);
-    const accessToken = get(response, "idToken.rawIdToken", "");
-    // if (!token && location.hostname === 'localhost') {
-    //   return 'dev_token';
-    // }
-
-    return accessToken;
+    try {
+      const response = await MsalInstance.acquireTokenSilent(tokenRequest);
+      const accessToken = get(response, "idToken.rawIdToken", "");
+      return accessToken;
+    }
+    catch (error) {
+      console.log("MSAL: (apiUtils.js) Error calling 'acquireTokenSilent'");
+      console.log(error);
+      console.log("MSAL: (apiUtils.js) calling 'acquireTokenRedirect'");
+      MsalInstance.acquireTokenRedirect(tokenRequest);
+    }
   }
 
   static getExpiredAt() {

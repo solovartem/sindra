@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 export const Spin = keyframes`
   0% {
@@ -10,6 +10,8 @@ export const Spin = keyframes`
 `;
 
 export const LoadingWrapper = styled.div`
+  height: 100%;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,5 +35,10 @@ export const SpinnerWrapper = styled.div`
 
 export const SubText = styled.span`
   color: white;
-  margin-top: 10px;
+  margin: 10px 0;
+`;
+
+export const SubTextBlack = styled.span`
+  color: black;
+  margin: 10px 0;
 `;
